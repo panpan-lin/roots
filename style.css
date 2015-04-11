@@ -272,7 +272,13 @@ section {
 
 /* >>>>> team >>>>> */
 
+#team {
+  background: white;
+}
 
+#team .col-md-4 {
+  margin-bottom: 20px;
+}
 
 
 
