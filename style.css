@@ -313,7 +313,7 @@ section {
 
 
 /* uigradients */
-.grad {
+.grad, #app {
 
   background-image: -webkit-gradient(
     linear,
