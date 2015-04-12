@@ -1,0 +1,169 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="js/vendor/dc/dc.css">
+        <link rel="stylesheet" type="text/css" href="dc-box-plot-time_files/dc.css">
+
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+        <![endif]-->
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">BarnBuddy</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+
+    <h2>Water Tank</h2>
+
+    <div class="container" id="visualisation-container">
+      <!-- tab for visulisation -->
+      <div class="tabs" role="tabpanel">
+        <ul class="nav nav-pills nav-justified">
+          <li role="presentation" class="active">
+            <a href="index.html" aria-controls="waterPurity" data-toggle="waterPurity">Purity</a>
+          </li>
+          <li role="presentation">
+            <a href="index2.html" aria-controls="waterLevel" data-toggle="waterLevel">Level</a>
+          </li>
+          <li role="presentation">
+            <a href="index3.html" aria-controls="waterPump" data-toggle="waterPump">Pump</a>
+          </li>
+          <li role="presentation">
+            <a href="index4.html" aria-contorls="waterTemp" data-toggle="waterTemp">Temperature</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tab-pane fade in active" id="waterPurity">
+        <div class="dc-chart" id="box-test"></div>
+        <div class="dc-chart" id="pie-chart"></div>
+        
+      </div>
+
+      <div class="tab-pane fade" id="waterLevel">
+      </div>
+
+      <div class="tab-pane fade" id="waterPump">
+      </div>
+
+      <div class="tab-pane fade" id="waterTemp">
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; BarnBuddy 2015</p>
+      </footer>
+    </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script src="js/main.js"></script>
+
+        <script type="text/javascript" src="dc-box-plot-time_files/d3.js"></script>
+<script type="text/javascript" src="dc-box-plot-time_files/crossfilter.js"></script>
+<script type="text/javascript" src="dc-box-plot-time_files/dc.js"></script>
+<script type="text/javascript">
+
+var chart = dc.boxPlot("#box-test"),
+    pie = dc.pieChart("#pie-chart");
+
+d3.csv("monthly-move.csv", function(error, data) {
+
+  data.forEach(function(x) {
+    x.close = +x.close;
+  });
+
+  data = data.slice(0, 200);
+
+  var ndx             = crossfilter(data),
+      openDimension   = ndx.dimension(function(d) {return parseInt(d.open/10)*10;}),
+      openGroup       = openDimension.group(),
+      monthDimension  = ndx.dimension(function(d) {return new Date(new Date(d.date).setDate(1));}),
+      closeGroup      = monthDimension.group().reduce(
+        function(p,v) {
+          p.push(v.close);
+          return p;
+        },
+        function(p,v) {
+          p.splice(p.indexOf(v.close), 1);
+          return p;
+        },
+        function() {
+          return [];
+        }
+      );
+
+  chart
+    .width(768)
+    .height(480)
+    .margins({top: 10, right: 50, bottom: 30, left: 50})
+    .dimension(monthDimension)
+    .group(closeGroup)
+    .x(d3.time.scale().domain([new Date("11/01/2014"), new Date("6/01/2015")]))
+    .round(d3.time.month.round)
+    .xUnits(d3.time.months)
+    .elasticY(true);
+
+  pie
+    .width(140)
+    .height(140)
+    .radius(70)
+    .dimension(openDimension)
+    .group(openGroup);
+
+  dc.renderAll();
+});
+
+</script>
+
+
+    </body>
+</html>
