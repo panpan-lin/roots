@@ -145,6 +145,62 @@ d3.csv("morley.csv", function(error, experiments) {
 });
 
 </script>
+
+    </section>
+    <!-- #home-image <<<<< -->
+
+
+    
+    
+    
+    <!-- footer >>>>> -->
+    <footer id="footer" class="grad">
+      
+      <div id="footer-copy">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <small>Copyright GYMY 2015.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </footer>
+    <!-- footer <<<<< -->
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="../js/tubular.js"></script>
+    
+    <script>
+      jQuery(function ($) {
+        // if movile device
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+         // some code..
+        } else {
+          $('#home-image').addClass('video');
+          $('#home-image').tubular({videoId: 'sZ4NH5phUZs', start:57});
+        }
+
+        // User click trigger
+        $('#user_trigger').click(function() {
+          $('#gym_trigger').removeClass('active');
+          $('#gyms-signup').fadeOut(function(){
+            $('#user-signup').fadeIn();
+          });
+        });
+        $('#gym_trigger').click(function() {
+          $('#user_trigger').removeClass('active');
+          $('#user-signup').fadeOut(function(){
+            $('#gyms-signup').fadeIn();
+          });
+        });
+
+      });
+    </script>
     
   </body>
 </html>
+    
