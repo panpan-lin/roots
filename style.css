@@ -6,7 +6,7 @@
 
 body {
   background: #F8F9FB;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Open Sans', sans-serif;
   font-size: 12px;
   -webkit-font-smoothing: subpixel-antialiased;
 }
@@ -328,4 +328,13 @@ section {
   background-image: -ms-linear-gradient(right top, #061700 0%, #52c234 100%) !important;
   background-image: linear-gradient(to right top, #061700 0%, #52c234 100%) !important;
         
+}
+
+#app {
+  padding: 5px 0px;
+}
+
+#map-canvas {
+  height: 600px !important;
+  width: 100% !important;
 }
