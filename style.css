@@ -156,7 +156,7 @@ section {
 }
 
 #home-image.video {
-  background: rgba(25,25,25,0.7);
+  background: rgba(25,25,25,0.3);
 }
 
 #home-image h1 {
@@ -172,7 +172,7 @@ section {
 
 
 .btn-wesavvy {
-  background: #FC5F45;
+  background: #255E16;
   color: white;
 }
 
@@ -319,13 +319,13 @@ section {
     linear,
     right top,
     right top,
-    color-stop(0, #F05143),
-    color-stop(1, #FCC46B)
+    color-stop(0, #52c234),
+    color-stop(1, #061700)
   ) !important;
-  background-image: -o-linear-gradient(right top, #F05143 0%, #FCC46B 100%) !important;
-  background-image: -moz-linear-gradient(right top, #F05143 0%, #FCC46B 100%) !important;
-  background-image: -webkit-linear-gradient(right top, #F05143 0%, #FCC46B 100%) !important;
-  background-image: -ms-linear-gradient(right top, #F05143 0%, #FCC46B 100%) !important;
-  background-image: linear-gradient(to right top, #F05143 0%, #FCC46B 100%) !important;
+  background-image: -o-linear-gradient(right top, #061700 0%, #52c234 100%) !important;
+  background-image: -moz-linear-gradient(right top, #52c234 0%, #061700 100%) !important;
+  background-image: -webkit-linear-gradient(right top, #061700 0%, #52c234 100%) !important;
+  background-image: -ms-linear-gradient(right top, #061700 0%, #52c234 100%) !important;
+  background-image: linear-gradient(to right top, #061700 0%, #52c234 100%) !important;
         
 }
