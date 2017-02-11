@@ -1,21 +1,18 @@
 
-@import url(http://fonts.googleapis.com/css?family=Nunito);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 
 
 body {
   background: #F8F9FB;
-  font-family: 'Helvetica Neue', 'Helvetica', 'Open Sans', sans-serif;
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
   font-size: 12px;
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 }
-
-
 
 /* >>>> header >>>> */
 
@@ -337,4 +334,12 @@ section {
 #map-canvas {
   height: 600px !important;
   width: 100% !important;
+}
+
+#logo-white-text {
+  color: #ddd;
+}
+
+#big-white-logo-img {
+  height:200px;
 }
